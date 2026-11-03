@@ -71,24 +71,43 @@ const students = [
 
 // -- (a)
 
-let arr = [1,2,3,4,5];
-let arr1 = [6,7,8,9,10];
+// let arr = [1,2,3,4,5];
+// let arr1 = [6,7,8,9,10];
 
-let arr2 = [...arr,...arr1];
-console.log(arr2)
+// let arr2 = [...arr,...arr1];
+// console.log(arr2)
 
-// -- (b)
+// // -- (b)
 
-let arr3 = [ 0, ...arr2, 11];
-console.log("altered",arr3)
-console.log( "original",arr2)
+// let arr3 = [ 0, ...arr2, 11];
+// console.log("altered",arr3)
+// console.log( "original",arr2)
 
-// -- (c)
+// // -- (c)
 
-const defaults = { theme: "light", size: 14 };
-const mine = { theme: "dark", size: 18 };
+// const defaults = { theme: "light", size: 14 };
+// const mine = { theme: "dark", size: 18 };
 
-let settings = {...defaults, ...mine} // the last one wins and override the existing propertys 
-console.log(settings)
-settings = {...mine, ...defaults} // the last one wins and override the existing property so "dark" get overriden
-console.log("order altered" , settings)
+// let settings = {...defaults, ...mine} // the last one wins and override the existing propertys 
+// console.log(settings)
+// settings = {...mine, ...defaults} // the last one wins and override the existing property so "dark" get overriden
+// console.log("order altered" , settings)
+
+
+// 5:(a) From students[0].marks, make a new object without science,
+//  using rest. No delete.
+//  (b) Predict best and others for
+//  const [best, ...others] = [90, 85, 70];.
+
+// --- (a)
+
+const {science,...rest} = students[0].marks
+
+console.log(rest)
+
+// --- (b)
+
+ const [best, ...others] = [90, 85, 70];
+ console.log(best)   //90
+ console.log(others) //[85,70] 
+ 
