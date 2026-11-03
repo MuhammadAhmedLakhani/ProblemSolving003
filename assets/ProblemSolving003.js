@@ -58,11 +58,11 @@
 
 
 
-const students = [
-  { id: 1, name: "Basil",  city: "Karachi",  marks: { math: 82, science: 74 }},
-  { id: 2, name: "Asad",  city: "Islamabad", marks: { math: 45, science: 60 }},
-  { id: 3, name: "Muhammad Ahmed", city: "Swat",  marks: { math: 91, science: 88 }},
-];
+// const students = [
+//   { id: 1, name: "Basil",  city: "Karachi",  marks: { math: 82, science: 74 }},
+//   { id: 2, name: "Asad",  city: "Islamabad", marks: { math: 45, science: 60 }},
+//   { id: 3, name: "Muhammad Ahmed", city: "Swat",  marks: { math: 91, science: 88 }},
+// ];
 
 // 4:(a) Combine two arrays with spread. (b) Make a new array with an extra item at the 
 // start and at the end, without push or unshift, and confirm the originals are unchanged.
@@ -101,13 +101,32 @@ const students = [
 
 // --- (a)
 
-const {science,...rest} = students[0].marks
+// const {science,...rest} = students[0].marks
 
-console.log(rest)
+// console.log(rest)
 
-// --- (b)
+// // --- (b)
 
- const [best, ...others] = [90, 85, 70];
- console.log(best)   //90
- console.log(others) //[85,70] 
- 
+//  const [best, ...others] = [90, 85, 70];
+//  console.log(best)   //90
+//  console.log(others) //[85,70] 
+
+
+// Part C: Updating without changing the original, 60 minutes (the core)
+
+
+const students = [
+  { id: 1, name: "Basil",  city: "Karachi",  marks: { math: 82, science: 74 }},
+  { id: 2, name: "Asad",  city: "Islamabad", marks: { math: 45, science: 60 }},
+  { id: 3, name: "Muhammad Ahmed", city: "Swat",  marks: { math: 91, science: 88 }},
+];
+
+
+// Make a copy of students[0] with marks.math set to 90.
+// Print both. Prove the original is untouched, and check updated.marks !== students[0].marks.
+
+const updated =  {...students[0], marks : {...students[0].marks,math:90}}   
+// console.log("original",students[0])
+// console.log(updated)
+
+console.log(updated.marks !== students[0].marks)
