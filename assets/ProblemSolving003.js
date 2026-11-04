@@ -175,21 +175,66 @@
 
 //solving bug
 
-const withBonus = (s) => {
-  const copy = { ...s,marks:{...s.marks,math:s.marks.math + 5}};
-  return copy;
-};
+// const withBonus = (s) => {
+//   const copy = { ...s,marks:{...s.marks,math:s.marks.math + 5}};
+//   return copy;
+// };
 
-let student = { id: 1, name: "Basil",  city: "Karachi",  marks: { math: 82, science: 74 }};
-let updated = withBonus(student)
-console.log("updated -->" ,updated)
-console.log("original --->",student)
+// let student = { id: 1, name: "Basil",  city: "Karachi",  marks: { math: 82, science: 74 }};
+// let updated = withBonus(student)
+// console.log("updated -->" ,updated)
+// console.log("original --->",student)
 
-//bug gets solved because we create new object (thus a seprate notebook for the nested marks object)
+// //bug gets solved because we create new object (thus a seprate notebook for the nested marks object)
 
-// copying the whole student object into new one doest not mean that the marks array is also get scopied 
-//stll the nested marks array is pointing towardws the original marks object (same notebook)
+// // copying the whole student object into new one doest not mean that the marks array is also get scopied 
+// //stll the nested marks array is pointing towardws the original marks object (same notebook)
 
-console.log(student.marks === updated.marks)
+// console.log(student.marks === updated.marks)
 
 
+// Part D: Saving data (JSON and localStorage), 50 minutes
+
+
+const students = [
+  { id: 1, name: "Basil",  city: "Karachi",  marks: { math: 82, science: 74 }},
+  { id: 2, name: "Asad",  city: "Islamabad", marks: { math: 45, science: 60 }},
+  { id: 3, name: "Muhammad Ahmed", city: "Swat",  marks: { math: 91, science: 88 }},
+];
+
+
+
+// 10:JSON.stringify(students[0]): print the text and its typeof. 
+// Parse it back and check parsed === students[0]. 
+// Then predict what survives from { a: undefined, b: () => 1, c: new Date(0),
+//  d: NaN, e: [1, undefined] }, and run it. List everything that changed.
+
+let string = JSON.stringify(students[0]); 
+
+console.log(string)
+console.log(typeof(string))
+
+ let parsed = JSON.parse(string)
+ console.log(parsed)
+ console.log(students[0])
+
+console.log(parsed === students[0])
+
+
+// different data behaves differently and gets lost  
+
+ let test = { 
+  a: undefined,  //lost
+  b: () => 1,    //functions lost
+  c: new Date(0), //converted inti the plain text
+  d: NaN,         //converted to null
+  e: [1, undefined]    //undefined cinverted inti the null as well
+}
+
+let text = JSON.stringify(test)
+console.log(text)
+let parsed1 = JSON.parse(text)
+console.log("parsed",parsed1)
+
+
+// he date comes back as plain text and the function is lost
