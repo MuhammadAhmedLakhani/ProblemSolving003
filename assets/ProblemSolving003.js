@@ -115,11 +115,11 @@
 // Part C: Updating without changing the original, 60 minutes (the core)
 
 
-const students = [
-  { id: 1, name: "Basil",  city: "Karachi",  marks: { math: 82, science: 74 }},
-  { id: 2, name: "Asad",  city: "Islamabad", marks: { math: 45, science: 60 }},
-  { id: 3, name: "Muhammad Ahmed", city: "Swat",  marks: { math: 91, science: 88 }},
-];
+// const students = [
+//   { id: 1, name: "Basil",  city: "Karachi",  marks: { math: 82, science: 74 }},
+//   { id: 2, name: "Asad",  city: "Islamabad", marks: { math: 45, science: 60 }},
+//   { id: 3, name: "Muhammad Ahmed", city: "Swat",  marks: { math: 91, science: 88 }},
+// ];
 
 
 //6: Make a copy of students[0] with marks.math set to 90.
@@ -158,7 +158,38 @@ const students = [
 //8: Add a new student and remove student 2, both without
 //  push, splice, or delete. Print the lengths of the original and the new arrays.
 
-let updated = students.filter(stu => stu.id !== 2)
+// let updated = students.filter(stu => stu.id !== 2)
 
-updated = [ ...updated,{id:4,name:"Sarim",city:"Johansburg",marks:{math:0,science:0}}]
-console.log(updated)
+// updated = [ ...updated,{id:4,name:"Sarim",city:"Johansburg",marks:{math:0,science:0}}]
+// console.log(updated)
+
+// 9: Bug hunt. This function claims not to change its input. Run it, print the original,
+//  find the mutation, explain it, and fix it:
+// javascript
+
+// const withBonus = (s) => {
+//   const copy = { ...s };
+//   copy.marks.math += 5;
+//   return copy;
+// };
+
+//solving bug
+
+const withBonus = (s) => {
+  const copy = { ...s,marks:{...s.marks,math:s.marks.math + 5}};
+  return copy;
+};
+
+let student = { id: 1, name: "Basil",  city: "Karachi",  marks: { math: 82, science: 74 }};
+let updated = withBonus(student)
+console.log("updated -->" ,updated)
+console.log("original --->",student)
+
+//bug gets solved because we create new object (thus a seprate notebook for the nested marks object)
+
+// copying the whole student object into new one doest not mean that the marks array is also get scopied 
+//stll the nested marks array is pointing towardws the original marks object (same notebook)
+
+console.log(student.marks === updated.marks)
+
+
