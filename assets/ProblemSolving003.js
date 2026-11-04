@@ -122,11 +122,35 @@ const students = [
 ];
 
 
-// Make a copy of students[0] with marks.math set to 90.
+//6: Make a copy of students[0] with marks.math set to 90.
 // Print both. Prove the original is untouched, and check updated.marks !== students[0].marks.
 
-const updated =  {...students[0], marks : {...students[0].marks,math:90}}   
-// console.log("original",students[0])
+// const updated =  {...students[0], marks : {...students[0].marks,math:90}}   
 // console.log(updated)
+// // console.log("original",students[0])
+// // console.log(updated)
 
-console.log(updated.marks !== students[0].marks)
+// console.log(updated.marks !== students[0].marks)
+
+//7: Update Asad’s city to "Johansburg" inside students using map. 
+// Check that updated[0] === students[0] is true and updated[1] === students[1] is false.
+//  Explain why that’s good.
+
+let updated = students.map(elem =>{ 
+  if(elem.name === 'Asad'){
+    //copying the asad object only and changing  without affecting the original object
+    return {...elem,city:"Johansburg"}
+}else{
+  return elem
+}
+})
+
+
+console.log(updated[0] ===students[0] )  // true
+console.log(updated[1] ===students[1] )  //false
+
+//--why good
+
+//it is a good as we have preserved the original array as it is
+//  and only relevant object of the array is altered
+
