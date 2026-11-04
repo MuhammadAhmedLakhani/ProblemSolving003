@@ -136,21 +136,29 @@ const students = [
 // Check that updated[0] === students[0] is true and updated[1] === students[1] is false.
 //  Explain why that’s good.
 
-let updated = students.map(elem =>{ 
-  if(elem.name === 'Asad'){
-    //copying the asad object only and changing  without affecting the original object
-    return {...elem,city:"Johansburg"}
-}else{
-  return elem
-}
-})
+// let updated = students.map(elem =>{ 
+//   if(elem.name === 'Asad'){
+//     //copying the asad object only and changing  without affecting the original object
+//     return {...elem,city:"Johansburg"}
+// }else{
+//   return elem
+// }
+// })
 
 
-console.log(updated[0] ===students[0] )  // true
-console.log(updated[1] ===students[1] )  //false
+// console.log(updated[0] ===students[0] )  // true
+// console.log(updated[1] ===students[1] )  //false
 
 //--why good
 
 //it is a good as we have preserved the original array as it is
 //  and only relevant object of the array is altered
 
+
+//8: Add a new student and remove student 2, both without
+//  push, splice, or delete. Print the lengths of the original and the new arrays.
+
+let updated = students.filter(stu => stu.id !== 2)
+
+updated = [ ...updated,{id:4,name:"Sarim",city:"Johansburg",marks:{math:0,science:0}}]
+console.log(updated)
