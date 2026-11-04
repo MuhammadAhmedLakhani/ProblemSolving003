@@ -209,32 +209,76 @@ const students = [
 // Then predict what survives from { a: undefined, b: () => 1, c: new Date(0),
 //  d: NaN, e: [1, undefined] }, and run it. List everything that changed.
 
-let string = JSON.stringify(students[0]); 
+// let string = JSON.stringify(students[0]); 
 
-console.log(string)
-console.log(typeof(string))
+// console.log(string)
+// console.log(typeof(string))
 
- let parsed = JSON.parse(string)
- console.log(parsed)
- console.log(students[0])
+//  let parsed = JSON.parse(string)
+//  console.log(parsed)
+//  console.log(students[0])
 
-console.log(parsed === students[0])
-
-
-// different data behaves differently and gets lost  
-
- let test = { 
-  a: undefined,  //lost
-  b: () => 1,    //functions lost
-  c: new Date(0), //converted inti the plain text
-  d: NaN,         //converted to null
-  e: [1, undefined]    //undefined cinverted inti the null as well
-}
-
-let text = JSON.stringify(test)
-console.log(text)
-let parsed1 = JSON.parse(text)
-console.log("parsed",parsed1)
+// console.log(parsed === students[0])
 
 
-// he date comes back as plain text and the function is lost
+// // different data behaves differently and gets lost  
+
+//  let test = { 
+//   a: undefined,  //lost
+//   b: () => 1,    //functions lost
+//   c: new Date(0), //converted inti the plain text
+//   d: NaN,         //converted to null
+//   e: [1, undefined]    //undefined cinverted inti the null as well
+// }
+
+// let text = JSON.stringify(test)
+// console.log(text)
+// let parsed1 = JSON.parse(text)
+// console.log("parsed",parsed1)
+
+
+// the date comes back as plain text and the function is lost
+
+
+// 11:Write safeParse(text, fallback) that returns the parsed value,
+// or fallback if the text is broken.
+//  Test: valid JSON, "{bad", "", and null. 
+// Watch the last one: predict what a plain JSON.parse(null) gives, 
+// and make your function return the fallback in that case.
+
+//--my attempt
+
+// let data = JSON.stringify(students[0])
+
+// let safeParse = (text,fallback) => {
+//       try{
+//         if(text[text.length - 1]  === "}"){
+//           return "fine"
+//         }
+//       } catch(error) {
+//         return fallback
+//       }
+// }
+
+// console.log(safeParse(data,"never fall"))
+
+//--solution (needs to understand)
+
+const safeParse = (text, fallback) => {
+  if (text === null) {
+    return fallback;            // nothing was ever saved
+  }
+  try {
+    return JSON.parse(text);    // valid text gives the real data
+  } catch (error) {
+    return fallback;            // broken or empty text
+  }
+};
+
+console.log(safeParse('{"a":1}', []));   // { a: 1 }
+console.log(safeParse("{bad", []));      // []
+console.log(safeParse("", []));          // []
+console.log(safeParse(null, []));        // []
+console.log(safeParse("0", 99));         // 0   (a real value, not replaced)
+console.log(safeParse("false", 99));     // false
+console.log(safeParse("null", 99))       // null  (valid JSON text, so it's returned as is)
