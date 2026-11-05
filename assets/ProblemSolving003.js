@@ -26,7 +26,7 @@
 //  const {name,city} = students[0]
 //  console.log(name)
 //  console.log(city)
- 
+
 // //  renaming 
 
 // const {name:studentName} = students[0]
@@ -197,9 +197,9 @@
 
 
 const students = [
-  { id: 1, name: "Basil",  city: "Karachi",  marks: { math: 82, science: 74 }},
-  { id: 2, name: "Asad",  city: "Islamabad", marks: { math: 45, science: 60 }},
-  { id: 3, name: "Muhammad Ahmed", city: "Swat",  marks: { math: 91, science: 88 }},
+  { id: 1, name: "Basil", city: "Karachi", marks: { math: 82, science: 74 } },
+  { id: 2, name: "Asad", city: "Islamabad", marks: { math: 45, science: 60 } },
+  { id: 3, name: "Muhammad Ahmed", city: "Swat", marks: { math: 91, science: 88 } },
 ];
 
 
@@ -265,6 +265,7 @@ const students = [
 //--solution (needs to understand)
 
 const safeParse = (text, fallback) => {
+  console.log("recieved text --> ", text)
   if (text === null) {
     return fallback;            // nothing was ever saved
   }
@@ -275,10 +276,47 @@ const safeParse = (text, fallback) => {
   }
 };
 
-console.log(safeParse('{"a":1}', []));   // { a: 1 }
-console.log(safeParse("{bad", []));      // []
-console.log(safeParse("", []));          // []
-console.log(safeParse(null, []));        // []
-console.log(safeParse("0", 99));         // 0   (a real value, not replaced)
-console.log(safeParse("false", 99));     // false
-console.log(safeParse("null", 99))       // null  (valid JSON text, so it's returned as is)
+// console.log(safeParse('{"a":1}', []));   // { a: 1 }
+// console.log(safeParse("{bad", []));      // []
+// console.log(safeParse("", []));          // []
+// console.log(safeParse(null, []));        // []
+// console.log(safeParse("0", 99));         // 0   (a real value, not replaced)
+// console.log(safeParse("false", 99));     // false
+// console.log(safeParse("null", 99))       // null  (valid JSON text, so it's returned as is)
+
+//12: Write saveStudents(list) and loadStudents() using localStorage and safeParse,
+//  with the fallback []. Test: the first run (nothing saved),
+// then save and refresh the page, then corrupt it by hand with 
+// localStorage.setItem("students", "{bad"). 
+// The last should still load an empty list without crashing.
+
+
+let saveStudents = (list) => {
+  localStorage.setItem("students", JSON.stringify(list))
+}
+
+console.log(saveStudents(students))
+
+// ------ my attempt ---------
+
+// let loadStudents = () => {
+//   const parsed =  students.map((elem,ind) => {
+//     let data = localStorage.getItem(ind)
+//     const result = safeParse(data,[])
+//     return result
+//   })
+
+//    return parsed
+
+// }
+
+//---- now improving
+
+// let loadStudents = () => {
+//   let data = localStorage.getItem("students")
+//   const result = safeParse(data, [])
+//   return result
+// }
+
+
+// console.log(loadStudents())
